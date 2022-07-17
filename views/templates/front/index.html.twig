@@ -155,34 +155,34 @@
                      <input type="text" id="firstname" name="firstname" placeholder="Prénom :" value="{% if firstname is defined %}{{ firstname|e }}{% endif %}" maxlength="100" required />
                      <label for="lastname"></label>
                      <input type="text" id="lastname" name="lastname" placeholder="Nom :" value="{% if lastname is defined %}{{ lastname|e }}{% endif %}" maxlength="100" required />
-                     {% if emptyName %}
-                        <p>Le <em>prénom</em> ou le <em>nom</em> ne peuvent pas être vide.</p>
-                     {% elseif invalidName %}
-                        <p>Le <em>prénom</em> ou le <em>nom</em> doivent contenir au moins 2 caractères et ne pas comporter de caractères spéciaux.</p>
+                     {% if errors.emptyName is defined %}
+                        <p>{{ errors.emptyName|e }}</p>
+                     {% elseif errors.invalidName is defined %}
+                        <p>{{ errors.invalidName|e }}</p>
                      {% endif %}
                   </div>
                </div>
                <div>
                   <label for="email"></label>
                   <input type="email" id="email" class="email" name="email" placeholder="E-mail :" value="{% if email is defined %}{{ email|e }}{% endif %}" maxlength="100" required />
-                  {% if emptyMail %}
-                     <p>L'adresse <em>e-mail</em> ne peut pas être vide.</p>
-                  {% elseif invalidMail %}
-                     <p>L'adresse <em>e-mail</em> n'est pas valide.</p>
+                  {% if errors.emptyMail is defined %}
+                     <p>{{ errors.emptyMail|e }}</p>
+                  {% elseif errors.invalidMail is defined %}
+                     <p>{{ errors.invalidMail|e }}</p>
                   {% endif %}
                </div>
                <div>
                   <label for="subject"></label>
                   <input type="text" id="subject" class="subject" name="subject" placeholder="Sujet :" value="{% if subject is defined %}{{ subject|e }}{% endif %}" maxlength="100" required />
-                  {% if emptySubject %}
-                     <p>Le <em>sujet</em> du message ne peut pas être vide.</p>
+                  {% if errors.emptySubject is defined %}
+                     <p>{{ errors.emptySubject|e }}</p>
                   {% endif %}
                </div>
                <div>
                   <label for="content"></label>
                   <textarea id="content" name="content" placeholder="Votre message :" maxlength="400" rows="6" required>{% if content is defined %}{{ content|e }}{% endif %}</textarea>
-                  {% if emptyContent %}
-                     <p>Le champ de saisie <em>votre message</em> ne peut pas être vide.</p>
+                  {% if errors.emptyContent is defined %}
+                     <p>{{ errors.emptyContent|e }}</p>
                   {% endif %}
                </div>
                <button type="submit" class="button" name="message">Envoyer</button>

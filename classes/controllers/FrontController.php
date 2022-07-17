@@ -31,47 +31,42 @@
                 $subject = strip_tags(trim($_POST["subject"])); // We retrieve the subject of the message
                 $content = strip_tags(trim($_POST["content"])); // We retrieve the content of the message
                 $valid = true;
-                $emptyName = false;
-                $invalidName = false;
-                $emptyMail = false;
-                $invalidMail = false;
-                $emptySubject = false;
-                $emptyContent = false;
+                $errors = [];
 
                 // Check first and last name
                 if(empty($firstname) || empty($lastname)) {
                     $valid = false;
-                    $emptyName = true;
+                    $errors['emptyName'] = "Le \"Prénom\" et/ou le \"Nom\" ne peuvent être vide.";
                 }
 
                 // Check that the first and last name are in the correct format
-                elseif(!preg_match("/^[0-9A-Za-zàäâçéèëêïîöôùüû\s_-]{2,}$/", $firstname) || !preg_match("/^[0-9A-Za-zàäâçéèëêïîöôùüû\s_-]{2,}$/", $lastname)) {
+                elseif(!preg_match("/^[A-Za-zàäâçéèëêïîöôùüû\s_-]{2,}$/", $firstname) || !preg_match("/^[A-Za-zàäâçéèëêïîöôùüû\s_-]{2,}$/", $lastname)) {
                     $valid = false;
-                    $invalidName = true;
+                    $errors['invalidName'] = "Le \"Prénom\" et/ou le \"Nom\" doivent contenir au moins 2 caractères et ne pas comporter de caractères spéciaux.";
                 }
 
                 // Verification of the e-mail address
                 if(empty($email)) {
                     $valid = false;
-                    $emptyMail = true;
+                    $errors['emptyMail'] = "L'adresse \"E-mail\" ne peut être vide.";
                 }
 
                 // Check that the email address is in the correct format
                 elseif(!preg_match("/^[0-9a-z\-_.]+@[0-9a-z]+\.[a-z]{2,3}$/i", $email)) {
                     $valid = false;
-                    $invalidMail = true;
+                    $errors['invalidMail'] = "L'adresse \"E-mail\" n'est pas valide.";
                 }
 
                 // Check message subject
                 if(empty($subject)) {
                     $valid = false;
-                    $emptySubject = true;
+                    $errors['emptySubject'] = "Le \"Sujet\" du message ne peut être vide.";
                 }
 
                 // Check message content
                 if(empty($content)) {
                     $valid = false;
-                    $emptyContent = true;
+                    $errors['emptyContent'] = "Le champ de saisie \"Votre message\" ne peut être vide.";
                 }
 
                 // If all the conditions are met then we move on to processing
@@ -122,12 +117,7 @@
                     'email' => $email,
                     'subject' => $subject,
                     'content' => $content,
-                    'emptyName' => $emptyName,
-                    'invalidName' => $invalidName,
-                    'emptyMail' => $emptyMail,
-                    'invalidMail' => $invalidMail,
-                    'emptySubject' => $emptySubject,
-                    'emptyContent' => $emptyContent]
+                    'errors' => $errors]
                 );
             }
         }

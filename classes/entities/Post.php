@@ -10,9 +10,10 @@
         public	$chapo;
         public	$contents;
         public	$slug;
-        public	$status;
+        public	$published;
         public	$date_add;
         public	$date_updated;
 
-        const PUBLISHED = "Published";
+        const PUBLISHED = 1;
+        const NOT_DELETED = 0;
     }

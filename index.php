@@ -44,6 +44,21 @@
         $adminController->displayPosts();
     });
 
+    $router->post('/backoff/posts', function() {
+        $adminController = new AdminController();
+        $adminController->renderFormResetPost($_POST["resetPost"]);
+    });
+
+    $router->get('/backoff/add-post', function() {
+        $adminController = new AdminController();
+        $adminController->displayAddPost();
+    });
+
+    $router->post('/backoff/add-post', function() {
+        $adminController = new AdminController();
+        $adminController->renderFormAddPost();
+    });
+
     $router->get('/backoff/post-:id', 'Admin#displayEditPost')->with("id", "[0-9]+");
 
     if(isset($_POST["editPost"])) {

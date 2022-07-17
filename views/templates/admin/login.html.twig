@@ -4,25 +4,25 @@
 {% block content %}
    <!-- MAIN CONTENT -->
    <div class="containerLogin mt-5 d-flex justify-content-center">
-      <div class="col-md-6">
+      <div class="col-md-4">
          <form class="card px-5 py-5" method="POST">
             <ul class="form-data">
                <li class="forms-inputs mb-4">
                   <input type="text" name="mailUsername" placeholder="Nom d'utilisateur ou e-mail :" value="{% if mailUsername is defined %}{{ mailUsername|e }}{% endif %}" required />
-                  {% if emptyIdentifier %}
-                     <div><p>L'<em>identifiant</em> ne peut pas être vide.</p></div>
+                  {% if errors.emptyIdentifier is defined %}
+                     <div><p>{{ errors.emptyIdentifier|e }}</p></div>
                   {% endif %}
                </li>
                <li class="forms-inputs mb-4">
                   <input type="password" class="password" name="password" placeholder="Mot de passe :" value="{% if password is defined %}{{ password|e }}{% endif %}" required />
-                  {% if emptyPass %}
-                     <div><p>Le <em>mot de passe</em> ne peut pas être vide.</p></div>
+                  {% if errors.emptyPass is defined %}
+                     <div><p>{{ errors.emptyPass|e }}</p></div>
                   {% endif %}
                </li>
             </ul>
             <button class="button" type="submit" name="login">Connexion</button>
-            {% if loginError b-and emptyIdentifier == false b-and emptyPass == false %}
-               <div><p>L'<em>identifiant</em> ou le <em>mot de passe</em> est incorrect.</p></div>
+            {% if errors.loginError is defined b-and errors.emptyIdentifier is not defined b-and errors.emptyPass is not defined %}
+               <div><p>{{ errors.loginError|e }}</p></div>
             {% endif %}
          </form>
       </div>

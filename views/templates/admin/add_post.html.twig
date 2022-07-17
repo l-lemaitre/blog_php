@@ -1,0 +1,68 @@
+{% extends "layout_bo.html.twig" %}
+
+{% block title %}Ajouter un Article{% endblock %}
+{% block content %}
+   <!-- BREADCRUMB -->
+   <nav class="breadcrumbs breadcrumbs-bo">
+      <ul>
+         <li><a href="/blog_php/backoff/dashboard" class="home">Accueil</a></li>
+         <li><a href="/blog_php/backoff/posts?page=1">Liste des articles</a></li>
+         <li class="threadTitle">Ajouter un article</li>
+         <li class="threadTitle300" title="Ajouter un article">Ajouter ...</li>
+      </ul>
+   </nav>
+   <!-- MAIN CONTENT -->
+   <div class="containerAdd containerEdit">
+      <h3><i class="fa fa-plus"></i>Ajouter un article</h3>
+      <form method="POST">
+         <div>
+            <label for="category">Catégorie :</label>
+            <select id="category" name="category" required>
+               {% for category in categories %}
+                  <option value="{{ category.id_category|e }}" {% if category.id_category == post.category_id %}selected="selected"{% endif %}>
+                     {{ category.title|e }}
+                  </option>
+               {% endfor %}
+            </select>
+            {% if errors.emptyCategory is defined %}
+               <p>{{ errors.emptyCategory|e }}</p>
+            {% elseif errors.invalidCategory is defined %}
+               <p>{{ errors.invalidCategory|e }}</p>
+            {% endif %}
+         </div>
+         <div>
+            <label for="title">Titre :</label>
+            <input type="text" id="title" name="title" value="{{ post.title|e }}" required />
+            {% if errors.emptyTitle is defined %}
+               <p>{{ errors.emptyTitle|e }}</p>
+            {% endif %}
+         </div>
+         <div>
+            <div>
+               <label for="chapo">Chapô :</label>
+               <input type="text" id="chapo" name="chapo" value="{{ post.chapo|e }}" required />
+               {% if errors.emptyChapo is defined %}
+                  <p>{{ errors.emptyChapo|e }}</p>
+               {% endif %}
+            </div>
+            <label for="contents">Contenu :</label>
+            <textarea id="contents" name="contents" rows="6" required>{{ post.contents|e }}</textarea>
+            {% if errors.emptyContents is defined %}
+               <p>{{ errors.emptyContents|e }}</p>
+            {% endif %}
+         </div>
+         <div>
+            <label for="slug">Permalien :</label>
+            <input type="text" id="slug" name="slug" value="{{ post.slug|e }}" required />
+            {% if errors.emptySlug is defined %}
+               <p>{{ errors.emptySlug|e }}</p>
+            {% endif %}
+         </div>
+         <div>
+            <label for="published" class="publishedLabel">Publié </label>
+            <input type="checkbox" id="published" class="published" name="published" {% if post.published == 1 or published is defined %}checked="checked"{% endif %} />
+         </div>
+         <input type="submit" class="btn" name="addPost" value="Valider" />
+      </form>
+   </div>
+{% endblock %}

@@ -10,6 +10,7 @@
       </ul>
    </nav>
    <div class="container-bo">
+      <h3><a href="/blog_php/backoff/add-post"><i class="fa fa-plus"></i>Ajouter un article</a></h3>
       <table class="table table-striped">
          <thead>
             <tr>
@@ -18,8 +19,7 @@
                <th scope="col">Auteur</th>
                <th scope="col">Titre</th>
                <th scope="col">Chapô</th>
-               <th scope="col">Statut</th>
-               <th scope="col">Supprimé</th>
+               <th scope="col">Publié</th>
                <th scope="col">Date de création</th>
                <th scope="col">Date de mise à jour</th>
                <th scope="col">Options</th>
@@ -32,14 +32,15 @@
                   <td>{{ post.category_title|e }}</td>
                   <td>{{ post.user_username|e }}</td>
                   <td>{{ post.title|e }}</td>
-                  <td title="{{ post.chapo|e }}">{{ post.chapo|slice(0, 20) }}...</td>
-                  <td>{{ post.status|e }}</td>
-                  <td>{% if post.deleted == 0 %}Non{% else %}Oui{% endif %}</td>
+                  <td title="{{ post.chapo|e }}">{% if post.chapo|length > 20 %}{{ post.chapo|slice(0, 20) }}...{% else %}{{ post.chapo|e }}{% endif %}</td>
+                  <td>{% if post.published == 0 %}Non{% else %}Oui{% endif %}</td>
                   <td>{{ post.date_add|date("d/m/Y H:i") }}</td>
                   <td>{{ post.date_updated|date("d/m/Y H:i") }}</td>
                   <td>
                      <a href="/blog_php/backoff/post-{{ post.id_post|e }}" class="btn btn-secondary">Modifier</a>
-                     <button class="btn btn-danger" type="submit" name="reset">Supprimer</button>
+                     <form class="formReset" method="POST">
+                        <button class="btn btn-danger" type="submit" name="resetPost" value="{{ post.id_post|e }}">Supprimer</button>
+                     </form>
                   </td>
                </tr>
             {% endfor %}

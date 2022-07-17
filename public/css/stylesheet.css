@@ -130,12 +130,6 @@ h3 {
     text-underline-offset: 0.2rem;
     color: #8540f5 !important; }
 
-a i {
-  font-size: 3rem; }
-
-a i:hover {
-  color: #8540f5 !important; }
-
 h2 {
   font-family: "Wallpoet", sans-serif;
   font-size: 2.5rem;
@@ -154,7 +148,11 @@ i {
   font-size: 1.5rem; }
 
 .fa-github {
+  font-size: 3rem;
   color: indigo !important; }
+
+.fa-github:hover {
+  color: #8540f5 !important; }
 
 .exp-flex {
   flex-direction: column-reverse !important; }
@@ -312,7 +310,8 @@ footer {
     border-radius: 2px; }
     .containerLogin form ul {
       list-style: none;
-      margin: 0 auto; }
+      margin: 0 auto;
+      padding: 0; }
       .containerLogin form ul li input {
         height: 3rem;
         width: 30.1rem;
@@ -459,7 +458,32 @@ footer {
     margin: 0 auto 4rem; }
 
   .container-bo {
-    padding: 0 5rem; } }
+    padding: 0 5rem; }
+    .container-bo h3 {
+      margin-bottom: 3rem;
+      font-weight: 100;
+      text-align: right; }
+      .container-bo h3 a {
+        padding: 1rem 1.4rem 1rem 0;
+        font-size: 1.3rem;
+        text-decoration: none;
+        color: #ffffff;
+        background-color: indigo;
+        border: none;
+        border-radius: 3px;
+        transition-duration: 0.2s; }
+        .container-bo h3 a i {
+          height: 4rem;
+          width: 4rem;
+          margin-right: -0.5rem;
+          line-height: 4.1rem;
+          text-align: center; }
+    .container-bo h3:hover a {
+      color: #ffffff;
+      background-color: #8540f5;
+      cursor: pointer; }
+    .container-bo .formReset {
+      display: inline-block; } }
 @media (min-height: 1024px) {
   /* PAGE ERROR.HTML.TWIG */
   /* MAIN CONTENT */
@@ -738,6 +762,15 @@ footer {
         font-size: 1.3rem;
         font-style: italic;
         color: red; }
+      .containerAdd form div .publishedLabel, .containerEdit form div .publishedLabel {
+        display: initial;
+        padding-right: 0.3rem; }
+      .containerAdd form div .published, .containerEdit form div .published {
+        position: relative;
+        display: initial;
+        height: 1.4rem;
+        width: 1.4rem;
+        cursor: pointer; }
       .containerAdd form div p, .containerEdit form div p {
         margin: 0.2rem 0 0.7rem;
         line-height: 2rem;
@@ -802,5 +835,8 @@ footer {
       .containerAdd .formReset div p, .containerEdit .formReset div p {
         margin: -0.2rem 0 -0.6rem;
         color: red; }
+
+.containerAdd {
+  margin-bottom: 10.5rem; }
 
 /*# sourceMappingURL=stylesheet.css.map */
